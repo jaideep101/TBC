@@ -247,7 +247,7 @@ export default class LoginView extends Component {
       <View style={{ paddingLeft: 40, paddingRight: 40, marginTop: 60 }}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => Actions.tabbar()}
+          onPress={() => this.onPress()}
           activeOpacity={1}>
           {}
           <Text
