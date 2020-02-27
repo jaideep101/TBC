@@ -22,7 +22,8 @@ import GoldScreen from './src/scenes/TScenes/GoldScreen';
 import BlackScreen from './src/scenes/TScenes/BlackScreen';
 import ModalScreen from './src/scenes/TScenes/ModalScreen';
 import SearchScreen from './src/scenes/SearchScreen';
-import TabIcon from './src/components/TabIcon'
+import TabIcon from './src/components/TabIcon';
+
 import {
   StyleSheet
 } from 'react-native'
@@ -123,9 +124,9 @@ export default class App extends Component {
       <Scene
         key="tabbar"
         tabs={true}
-        tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarStyle} hideNavBar={true} showLabel={false}>
+        tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarStyle}  hideNavBar={true} showLabel={false}>
         {/* Tab and it's scenes */}
-        <Scene key="osu" title="OSU" icon={TabIcon} hideNavBar>
+        <Scene key="home" title="Home" icon={TabIcon} resource={require('./src/public/images/icon-home.png')} hideNavBar>
           <Scene key="scarlet" component={ScarletScreen} title="Scarlet" />
           <Scene key="gray" component={GrayScreen} title="Gray" hideNavBar />
           <Scene
@@ -137,14 +138,14 @@ export default class App extends Component {
         </Scene>
 
         {/* Tab and it's scenes */}
-        <Scene key="um" title="UM" icon={TabIcon} hideNavBar>
+        <Scene key="myProfile" title="My Profile" icon={TabIcon} resource={require('./src/public/images/icon_profile.png')} hideNavBar>
           <Scene key="blue" component={BlueScreen} title="Blue" hideNavBar />
           <Scene key="fbai" component={FBaseWrite} title="FB Add Item" />
           <Scene key="fbri" component={FBaseReadItems} title="FB Read" />
         </Scene>
 
         {/* Tab and it's scenes */}
-        <Scene key="vu" title="VU" icon={TabIcon} hideNavBar>
+        <Scene key="more" title="More" icon={TabIcon}  resource={require('./src/public/images/tabbar_more.png')}  hideNavBar>
           <Scene key="gold" component={GoldScreen} title="Gold" />
           <Scene key="black" component={BlackScreen} title="Black" />
         </Scene>
