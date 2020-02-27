@@ -30,7 +30,6 @@ export default (styles = StyleSheet.create({
     marginTop: 15,
   },
   inputWrapper: {
-    flex: 1,
     width: DEVICE_WIDTH - 40,
   },
   inlineImg: {
@@ -58,7 +57,6 @@ export default (styles = StyleSheet.create({
     height: MARGIN,
     borderRadius: 0,
     paddingTop:3, paddingBottom:5,
-    zIndex: 100,
   },
   circle: {
     height: MARGIN,

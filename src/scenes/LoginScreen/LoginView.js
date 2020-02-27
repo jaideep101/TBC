@@ -21,10 +21,13 @@ import styles from './LoginStyle';
 import { Actions } from 'react-native-router-flux';
 import Realm from 'realm';
 import { TBC_COLOR } from '../../config/colorConstant';
+import TouchID from 'react-native-touch-id';
+import ConfirmGoogleCaptcha from 'react-native-google-recaptcha-v2';
 var contants = require('../../config/Constants')
 var colorConstant = require('../../config/colorConstant')
 let realm;
-
+const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';
+const baseUrl = 'https://google.com';
 const MARGIN = 40;
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
@@ -37,6 +40,8 @@ export default class LoginView extends Component {
       isLoading: false,
       username: '',
       password: '',
+      isTouchIdSupported: false,
+      isFaceIdSupported: false,
     };
     this.showPass = this.showPass.bind(this);
     this.buttonAnimated = new Animated.Value(0);
@@ -51,6 +56,30 @@ export default class LoginView extends Component {
         user_password: 'admin1',
       });
     });
+    this.isTouchIdSupported()
+  }
+
+  isTouchIdSupported() {
+    const optionalConfigObject = {
+      unifiedErrors: false, // use unified error messages (default false)
+      passcodeFallback: false // if true is passed, itwill allow isSupported to return an error if the device is not enrolled in touch id/face id etc. Otherwise, it will just tell you what method is supported, even if the user is not enrolled.  (default false)
+    }
+
+    TouchID.isSupported(optionalConfigObject)
+      .then(biometryType => {
+        // Success code
+        if (biometryType === 'FaceID') {
+          this.setState({ isFaceIdSupported: true, isTouchIdSupported: true })
+          console.log('FaceID is supported.');
+        } else {
+          this.setState({ isFaceIdSupported: false, isTouchIdSupported: true })
+          console.log('TouchID is supported.');
+        }
+      })
+      .catch(error => {
+        // Failure code
+        console.log(error);
+      });
   }
 
   showPass() {
@@ -59,6 +88,21 @@ export default class LoginView extends Component {
       : this.setState({ showPass: true, press: false });
   }
 
+  onMessage = event => {
+    if (event && event.nativeEvent.data) {
+      if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
+          this.captchaForm.hide();
+          return;
+      } else {
+          console.log('Verified code from Google', event.nativeEvent.data);
+          setTimeout(() => {
+              this.captchaForm.hide();
+              // do what ever you want here
+          }, 1500);
+      }
+  }
+};
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: colorConstant.WHITE_COLOR }}>
@@ -66,8 +110,54 @@ export default class LoginView extends Component {
         {this.renderLoginTitle()}
         {this.renderValidationForm()}
         {this.renderSubmitButton()}
+        {this.renderTouchIdAndFaceId()}
+        <ConfirmGoogleCaptcha
+          ref={_ref => this.captchaForm = _ref}
+          siteKey={siteKey}
+          baseUrl={baseUrl}
+          languageCode='en'
+          onMessage={this.onMessage}
+        />
       </View>
     );
+  }
+
+  renderTouchIdAndFaceId() {
+    return (
+      <View style={{ marginTop: 20, alignItems: 'center' }}>
+        {(this.state.isTouchIdSupported) ? <TouchableOpacity onPress={() => { this.handleBioAuthentication() }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'Login with Touch ID / Face ID'}</Text>
+        </TouchableOpacity> : null}
+        <TouchableOpacity onPress={() => { this.captchaForm.show() }} style={{ marginTop: 10 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'reCaptcha'}</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+
+
+  handleBioAuthentication() {
+    let typeBioMatrix = "Touch ID";
+    if (this.state.isFaceIdSupported) {
+      typeBioMatrix = "Face ID";
+    }
+    const optionalConfigObject = {
+      title: typeBioMatrix + " Authentication", // use unified error messages (default false)
+      imageColor: colorConstant.TBC_COLOR, // if true is passed, itwill allow isSupported to return an error if the device is not enrolled in touch id/face id etc. Otherwise, it will just tell you what method is supported, even if the user is not enrolled.  (default false)
+      imageErrorColor: colorConstant.BROWSE_RED,
+      cancelText: 'Close'
+    }
+    TouchID.authenticate('Biomatrix Login', optionalConfigObject)
+      .then(success => {
+        // Success code
+        Actions.tabbar()
+        // alert('Authentication Successful')
+      })
+      .catch(error => {
+        // Failure code
+        alert('Authentication Failed!')
+      });
   }
 
   renderLoginTitle() {
@@ -90,7 +180,7 @@ export default class LoginView extends Component {
     return (
       <KeyboardAvoidingView
         behavior="height"
-        style={{ flex: 1, alignItems: 'center' }}>
+        style={{ alignItems: 'center' }}>
         <View style={styles.inputWrapper}>
           <View style={{ paddingLeft: 20, paddingRight: 20 }}>
             <TextInputMaterial
@@ -153,42 +243,19 @@ export default class LoginView extends Component {
     );
   }
   renderSubmitButton() {
-    const changeWidth = this.buttonAnimated.interpolate({
-      inputRange: [0, 1],
-      outputRange: [DEVICE_WIDTH - MARGIN, MARGIN],
-    });
-    const changeScale = this.growAnimated.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, MARGIN],
-    });
-
     return (
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{
-          flex: 1,
-          top: -55,
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-        }}>
-        <Animated.View style={{ width: changeWidth }}>
-          <View style={{ paddingLeft: 20, paddingRight: 20,  }}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.onPress()}
-              activeOpacity={1}>
-              {}
-              <Text
-                style={{ color: colorConstant.WHITE_COLOR, fontSize: 20, fontWeight: 'bold' }}>
-                {Constants.LOGIN_BUTTON_TEXT}
-              </Text>
-            </TouchableOpacity>
-            <Animated.View
-              style={[styles.circle, { transform: [{ scale: changeScale }] }]}
-            />
-          </View>
-        </Animated.View>
-      </KeyboardAvoidingView>
+      <View style={{ paddingLeft: 40, paddingRight: 40, marginTop: 60 }}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => Actions.tabbar()}
+          activeOpacity={1}>
+          {}
+          <Text
+            style={{ color: colorConstant.WHITE_COLOR, fontSize: 20, fontWeight: 'bold' }}>
+            {Constants.LOGIN_BUTTON_TEXT}
+          </Text>
+        </TouchableOpacity>
+      </View>
     );
   }
   onPress() {
