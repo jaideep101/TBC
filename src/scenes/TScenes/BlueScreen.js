@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import Header from '../../components/Header';
 
 const BlueScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome} onPress={() => Actions.fbai()}>
-        Firebase Add Item
+      <Header title={'My Profile'} />
+      <View style={styles.viewContainer}>
+        <Text style={styles.welcome} onPress={() => Actions.fbai()}>
+          My Profile
       </Text>
-      <Text style={styles.welcome} onPress={() => Actions.modal()}>
+      </View>
+      {/* <Text style={styles.welcome} onPress={() => Actions.modal()}>
         Open Modal
-      </Text>
+      </Text> */}
     </View>
   );
 };
@@ -18,15 +22,18 @@ const BlueScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  viewContainer:{
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00274c',
+    flex:1
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    color: '#ffffff',
+    color: 'black',
   },
 });
 
