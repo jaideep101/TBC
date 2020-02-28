@@ -11,7 +11,10 @@ import {
 } from 'react-native';
 import headerStyle from './headerStyle';
 import { Text } from 'native-base';
-var constant = require('./headerConstant')
+import {fetchJsonGET} from '../../services/FetchData'
+var headerConstants = require('./headerConstant')
+var constants = require('../../config/Constants')
+var colorConstants = require('../../config/colorConstant');
 
 export default class Header extends Component {
     constructor(props) {
@@ -23,6 +26,11 @@ export default class Header extends Component {
 
     }
     componentDidMount() {
+    }
+
+    async fetchData(){
+        let responseData = await fetchJsonGET(constants.API_URL);
+        console.log("############### responseData")
     }
 
 

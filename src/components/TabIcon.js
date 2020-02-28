@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   viewContainer: { justifyContent: 'center', alignItems: 'center', height: 60 },
   selectedcontainer: {
-    tintColor: 'red',
+    tintColor: colorConstants.TBC_COLOR,
     overflow: 'hidden',
     height: 27,
     width: 27,
@@ -53,7 +53,7 @@ const TabIcon = props => (
         fontSize: 12,
         paddingTop:2,
         fontFamily: Platform.OS === 'ios' ? 'Helvetica' : 'sans-serif',
-        color: props.focused ? colorConstants.BROWSE_RED : colorConstants.BLACK_COLOR,
+        color: props.focused ? colorConstants.TBC_COLOR : colorConstants.BLACK_COLOR,
       }}>
       {props.title}
     </Text>

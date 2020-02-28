@@ -10,6 +10,7 @@ export const FETCHING_TODOS = 'FETCHING_TODOS';
 export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
 export const FETCH_TODOS_FAILURE = 'FETCH_TODOS_FAILURE';
 export const UNDERLINE_COLOR_ANDROID='transparent';
+export const API_URL = "http://dummy.restapiexample.com/api/v1/employees";
 
 
 export default {

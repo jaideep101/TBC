@@ -3,21 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Header from '../../components/Header';
 
-const GoldScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Header title={'More'} />
-      <View style={styles.viewContainer}>
-        <Text style={styles.welcome} onPress={() => Actions.black()}>
-          More
+export default class MyProfile extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header title={'My Profile'} />
+        <View style={styles.viewContainer}>
+          <Text style={styles.welcome} onPress={() => Actions.fbai()}>
+            My Profile
       </Text>
-      </View>
-      {/* <Text style={styles.welcome} onPress={() => Actions.modal()}>
+        </View>
+        {/* <Text style={styles.welcome} onPress={() => Actions.modal()}>
         Open Modal
       </Text> */}
-    </View>
-  );
-};
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -37,4 +39,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GoldScreen;

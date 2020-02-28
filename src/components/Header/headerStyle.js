@@ -4,20 +4,18 @@ var colorConstants = require('../../config/colorConstant');
 const header = {
   container: {
     flex:1,
-    backgroundColor: colorConstants.BROWSE_RED,
+    backgroundColor: colorConstants.TBC_COLOR,
   },
   viewContainer: {
     height: (Platform.OS === 'ios') ? 50 : 50,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colorConstants.BROWSE_RED
+    backgroundColor: colorConstants.TBC_COLOR
   },
   headerText: {
-    textAlign: 'center',
     color: colorConstants.WHITE_COLOR,
     fontSize: 18,
-    fontWeight:'bold',
+    marginLeft: 20
   },
 };
 
