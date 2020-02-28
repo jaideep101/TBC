@@ -170,21 +170,15 @@
     <orderEntry type="library" name="Gradle: com.facebook.fresco:nativeimagetranscoder:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.facebook.fresco:imagepipeline-okhttp3:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: org.webkit:android-jsc:r245459@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.microsoft.appcenter.reactnative:appcenter-react-native:2.6.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter-analytics:2.5.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter-crashes:2.5.1@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.microsoft.appcenter:appcenter:2.5.1@aar" level="project" />
     <orderEntry type="module" module-name="react-native-firebase" />
     <orderEntry type="module" module-name="bugsnag-react-native" />
-    <orderEntry type="module" module-name="appcenter" />
-    <orderEntry type="module" module-name="appcenter-analytics" />
-    <orderEntry type="module" module-name="appcenter-crashes" />
     <orderEntry type="module" module-name="react-native-google-analytics-bridge" />
     <orderEntry type="module" module-name="react-native-gesture-handler" />
     <orderEntry type="module" module-name="react-native-reanimated" />
     <orderEntry type="module" module-name="react-native-screens" />
     <orderEntry type="module" module-name="react-native-touch-id" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
+    <orderEntry type="module" module-name="react-native-webview" />
     <orderEntry type="module" module-name="realm" />
   </component>
 </module>
