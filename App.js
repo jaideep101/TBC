@@ -27,7 +27,7 @@ import TabIcon from './src/components/TabIcon';
 import {
   StyleSheet
 } from 'react-native'
-
+console.disableYellowBox = true;
 const styles = StyleSheet.create({
   container: {
     flex: 1, backgroundColor: 'transparent', justifyContent: 'center',

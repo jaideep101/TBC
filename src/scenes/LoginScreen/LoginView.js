@@ -19,6 +19,7 @@ import Constants from '../../config/Constants';
 
 import styles from './LoginStyle';
 import { Actions } from 'react-native-router-flux';
+import { getFBRealtimeDBFeatureFlags } from '../../config/firebasequery'
 import Realm from 'realm';
 import { TBC_COLOR } from '../../config/colorConstant';
 import TouchID from 'react-native-touch-id';
@@ -30,7 +31,7 @@ const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';
 const baseUrl = 'https://google.com';
 const MARGIN = 40;
 const DEVICE_WIDTH = Dimensions.get('window').width;
-
+var isCaptchaDisplay = false;
 export default class LoginView extends Component {
   constructor(props) {
     super(props);
@@ -57,8 +58,12 @@ export default class LoginView extends Component {
       });
     });
     this.isTouchIdSupported()
+    this.getFireBaseValue();
   }
-
+  async getFireBaseValue() {
+    let featureFlags = await getFBRealtimeDBFeatureFlags();
+    isCaptchaDisplay = featureFlags.isCaptchaDisplay
+  }
   isTouchIdSupported() {
     const optionalConfigObject = {
       unifiedErrors: false, // use unified error messages (default false)
@@ -91,17 +96,17 @@ export default class LoginView extends Component {
   onMessage = event => {
     if (event && event.nativeEvent.data) {
       if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
-          this.captchaForm.hide();
-          return;
+        this.captchaForm.hide();
+        return;
       } else {
-          console.log('Verified code from Google', event.nativeEvent.data);
-          setTimeout(() => {
-              this.captchaForm.hide();
-              // do what ever you want here
-          }, 1500);
+        console.log('Verified code from Google', event.nativeEvent.data);
+        setTimeout(() => {
+          this.captchaForm.hide();
+          // do what ever you want here
+        }, 1500);
       }
-  }
-};
+    }
+  };
 
   render() {
     return (
@@ -128,7 +133,7 @@ export default class LoginView extends Component {
         {(this.state.isTouchIdSupported) ? <TouchableOpacity onPress={() => { this.handleBioAuthentication() }}>
           <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'Login with Touch ID / Face ID'}</Text>
         </TouchableOpacity> : null}
-        <TouchableOpacity onPress={() => { this.captchaForm.show() }} style={{ marginTop: 10 }}>
+        <TouchableOpacity onPress={() => { (isCaptchaDisplay) ? this.captchaForm.show() : alert("Login Success") }} style={{ marginTop: 10 }}>
           <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'reCaptcha'}</Text>
         </TouchableOpacity>
       </View>
