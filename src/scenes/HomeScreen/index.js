@@ -32,7 +32,6 @@ export default class HomeScreen extends BaseComponent {
                 }
             }
         }
-        console.log("############### responseData 2: " + JSON.stringify(this.state.employeeList))
         return responseData;
     }
 
@@ -77,7 +76,6 @@ export default class HomeScreen extends BaseComponent {
     }
 
     renderItem(employeeItem) {
-        console.log("################# employeeItem : " + JSON.stringify(employeeItem))
         return (
             <View style={{ flex: 1, backgroundColor: colorConstants.WHITE_COLOR, marginBottom: 10 }}>
                 <View style={{
