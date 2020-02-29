@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-native/no-inline-loginStyle */
 /* eslint-disable react/no-string-refs */
 import React, { Component } from 'react';
 import {
@@ -17,14 +17,13 @@ import TextInputMaterial from '../../components/textInputMaterial';
 import PropTypes from 'prop-types';
 import Constants from '../../config/Constants';
 
-import styles from './LoginStyle';
 import { Actions } from 'react-native-router-flux';
 import { getFBRealtimeDBFeatureFlags } from '../../config/firebasequery'
 import Realm from 'realm';
 import { TBC_COLOR } from '../../config/colorConstant';
 import TouchID from 'react-native-touch-id';
 import ConfirmGoogleCaptcha from 'react-native-google-recaptcha-v2';
-var contants = require('../../config/Constants')
+import loginStyle from './loginStyle'
 var colorConstant = require('../../config/colorConstant')
 let realm;
 const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';
@@ -110,8 +109,7 @@ export default class LoginView extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: colorConstant.WHITE_COLOR }}>
-        {/* {this.renderLogo()} */}
+      <View style={loginStyle.renderContainer}>
         {this.renderLoginTitle()}
         {this.renderValidationForm()}
         {this.renderSubmitButton()}
@@ -129,12 +127,12 @@ export default class LoginView extends Component {
 
   renderTouchIdAndFaceId() {
     return (
-      <View style={{ marginTop: 20, alignItems: 'center' }}>
+      <View style={loginStyle.touchIdContainer}>
         {(this.state.isTouchIdSupported) ? <TouchableOpacity onPress={() => { this.handleBioAuthentication() }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'Login with Touch ID / Face ID'}</Text>
+          <Text style={loginStyle.touchIdLinkView}>{'Login with Touch ID / Face ID'}</Text>
         </TouchableOpacity> : null}
-        <TouchableOpacity onPress={() => { (isCaptchaDisplay) ? this.captchaForm.show() : alert("Login Success") }} style={{ marginTop: 10 }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR }}>{'reCaptcha'}</Text>
+        <TouchableOpacity onPress={() => { (isCaptchaDisplay) ? this.captchaForm.show() : alert("Login Success") }} style={loginStyle.reCaptchaView}>
+          <Text style={loginStyle.touchIdLinkView}>{'reCaptcha'}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -167,27 +165,19 @@ export default class LoginView extends Component {
 
   renderLoginTitle() {
     return (
-      <View style={{ height: contants.SCREEN_HEIGHT / 3, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 32, color: colorConstant.TBC_COLOR }}>{'Login Screen'}</Text>
+      <View style={loginStyle.loginTitleView}>
+        <Text style={loginStyle.loginTitleText}>{'Login Screen'}</Text>
       </View>
     )
-  }
-
-  renderLogo() {
-    return (
-      <View style={styles.container}>
-        <Image source={Constants.SPLASH_SCREEN_LOGO} style={styles.image} />
-      </View>
-    );
   }
 
   renderValidationForm() {
     return (
       <KeyboardAvoidingView
         behavior="height"
-        style={{ alignItems: 'center' }}>
-        <View style={styles.inputWrapper}>
-          <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+        style={loginStyle.validFormViewContainer}>
+        <View style={loginStyle.inputWrapper}>
+          <View style={loginStyle.validFormSubView}>
             <TextInputMaterial
               blurText={this.state.username}
               refsValue={Constants.TEXT_INPUT_USERNAME}
@@ -199,7 +189,7 @@ export default class LoginView extends Component {
               returnKeyType={'done'}
               autoCorrect={false}
               isLoginScreen={false}
-              style={styles.input}
+              style={loginStyle.input}
               placeholderTextColor={Constants.PLACEHOLDER_TEXT_COLOR}
               underlineColorAndroid={Constants.UNDERLINE_COLOR_ANDROID}
               value={this.state.username}
@@ -211,7 +201,7 @@ export default class LoginView extends Component {
                 this.refs.passwordInput.focus();
               }}
             />
-            <View style={{ marginTop: 15 }}>
+            <View style={loginStyle.validFormSecondFieldView}>
               <TextInputMaterial
                 secureTextEntry={this.state.showPass}
                 blurText={this.state.password}
@@ -229,7 +219,7 @@ export default class LoginView extends Component {
                 autoCapitalize={'none'}
                 returnKeyType={'done'}
                 autoCorrect={false}
-                style={styles.input}
+                style={loginStyle.input}
                 placeholderTextColor={Constants.PLACEHOLDER_TEXT_COLOR}
                 underlineColorAndroid={Constants.UNDERLINE_COLOR_ANDROID}
                 errorText={Constants.ERROR_TEXT_INPUT_PASSWORD}
@@ -238,9 +228,9 @@ export default class LoginView extends Component {
             </View>
             {/* <TouchableOpacity
                         activeOpacity={0.7}
-                        style={styles.btnEye}
+                        style={loginStyle.btnEye}
                         onPress={this.showPass}>
-                        <Image source={Constants.EYE_ICON} style={styles.iconEye} />
+                        <Image source={Constants.EYE_ICON} style={loginStyle.iconEye} />
                     </TouchableOpacity>  */}
           </View>
         </View>
@@ -249,14 +239,14 @@ export default class LoginView extends Component {
   }
   renderSubmitButton() {
     return (
-      <View style={{ paddingLeft: 40, paddingRight: 40, marginTop: 60 }}>
+      <View style={loginStyle.loginSumbitButtonView}>
         <TouchableOpacity
-          style={styles.button}
+          style={loginStyle.button}
           onPress={() => Actions.tabbar()}
           activeOpacity={1}>
           {}
           <Text
-            style={{ color: colorConstant.WHITE_COLOR, fontSize: 20, fontWeight: 'bold' }}>
+            style={loginStyle.loginSubmitButtonText}>
             {Constants.LOGIN_BUTTON_TEXT}
           </Text>
         </TouchableOpacity>

@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Header from '../../components/Header';
+import moreStyle from './moreStyle';
+var moreConstant = require('./moreConstants')
 
 export default class MoreScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Header title={'More Screen'} />
-        <View style={styles.viewContainer}>
-          <Text style={styles.welcome} onPress={() => Actions.black()}>
-            More Screen
-      </Text>
+      <View style={moreStyle.container}>
+        <Header title={moreConstant.MORE_SCREEN} />
+        <View style={moreStyle.viewContainer}>
+          <Text style={moreStyle.welcome}>{moreConstant.MORE_SCREEN}</Text>
         </View>
-        {/* <Text style={styles.welcome} onPress={() => Actions.modal()}>
-        Open Modal
-      </Text> */}
       </View>
     );
   }

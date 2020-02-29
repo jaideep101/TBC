@@ -1,7 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import Constants from '../../config/Constants';
 var colorConstant = require('../../config/colorConstant')
-
+var constants = require('../../config/Constants')
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const MARGIN = 40;
 
@@ -69,4 +68,37 @@ export default (styles = StyleSheet.create({
     zIndex: 99,
     backgroundColor: '#F035E0',
   },
+  renderContainer: {
+    flex: 1, backgroundColor: colorConstant.WHITE_COLOR
+  },
+  touchIdContainer: {
+    marginTop: 20, alignItems: 'center'
+  },
+  touchIdLinkView: {
+    fontWeight: 'bold', fontSize: 18, textDecorationLine: 'underline', color: colorConstant.TBC_COLOR
+  },
+  loginTitleView:{
+    height: constants.SCREEN_HEIGHT / 3, justifyContent: 'center', alignItems: 'center'
+  },
+  loginTitleText:{
+    fontSize: 32, color: colorConstant.TBC_COLOR 
+  },
+  loginSumbitButtonView:{
+    paddingLeft: 40, paddingRight: 40, marginTop: 60 
+  },
+  loginSubmitButtonText:{
+    color: colorConstant.WHITE_COLOR, fontSize: 20, fontWeight: 'bold'
+  },
+  validFormViewContainer:{
+    alignItems: 'center'
+  },
+  validFormSubView:{
+    paddingLeft: 20, paddingRight: 20
+  },
+  validFormSecondFieldView:{
+    marginTop: 15
+  },
+  reCaptchaView:{
+    marginTop: 10 
+  }
 }));

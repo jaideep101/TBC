@@ -6,6 +6,8 @@ import { fetchJsonGET, fetchJsonPOST } from '../../services/FetchData'
 import BaseComponent from '../../BaseComponent';
 var constants = require('../../config/Constants')
 var colorConstants = require('../../config/colorConstant')
+var homeConstants = require('./homeConstants');
+import homeStyle from './homeStyle';
 
 export default class HomeScreen extends BaseComponent {
     constructor(props) {
@@ -37,9 +39,9 @@ export default class HomeScreen extends BaseComponent {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Header title={'Home Screen'} />
-                <View style={styles.viewContainer}>
+            <View style={homeStyle.container}>
+                <Header title={homeConstants.HOME_SCREEN} />
+                <View style={homeStyle.viewContainer}>
                     {this.renderFlatList()}
                 </View>
             </View>
@@ -56,11 +58,7 @@ export default class HomeScreen extends BaseComponent {
                     data={this.state.employeeList}
                     ListHeaderComponent={() => this.renderHeaderView()}
                     ItemSeparatorComponent={(sectionId, rowId) => (
-                        <View key={rowId} style={{
-                            flex: 1,
-                            height: StyleSheet.hairlineWidth,
-                            backgroundColor: colorConstants.GRAY_MEDIUM_COLOR,
-                        }} />
+                        <View key={rowId} style={homeStyle.seperateLine} />
                     )}
                 />
             </View>
@@ -69,27 +67,23 @@ export default class HomeScreen extends BaseComponent {
 
     renderHeaderView() {
         return (
-            <View style={{ padding: 10, flex: 1, alignItems: 'center' }}>
-                <Text style={{ fontSize: 16, color: colorConstants.TBC_COLOR }}>{'Employee List'}</Text>
+            <View style={homeStyle.homeListHeaderView}>
+                <Text style={homeStyle.homeListHeaderText}>{homeConstants.LIST_HEADER}</Text>
             </View>
         )
     }
 
     renderItem(employeeItem) {
         return (
-            <View style={{ flex: 1, backgroundColor: colorConstants.WHITE_COLOR, marginBottom: 10 }}>
-                <View style={{
-                    flex: 1,
-                    height: StyleSheet.hairlineWidth,
-                    backgroundColor: colorConstants.GRAY_MEDIUM_COLOR,
-                }} />
-                <View style={{ flex: 1, padding: 20 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{width: 60}}>{'Name: '}</Text>
+            <View style={homeStyle.renderItemContainer}>
+                <View style={homeStyle.seperateLine} />
+                <View style={homeStyle.renderItemMainView}>
+                    <View style={homeStyle.renderItemSubView}>
+                        <Text style={homeStyle.renderItemText}>{homeConstants.LIST_ROW_NAME}</Text>
                         <Text style={{}}>{employeeItem.employee_name}</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', paddingTop: 3 }}>
-                        <Text style={{width: 60}}>{'Age: '}</Text>
+                    <View style={homeStyle.renderItemSubViewOne}>
+                        <Text style={homeStyle.renderItemText}>{homeConstants.LIST_ROW_AGE}</Text>
                         <Text style={{}}>{employeeItem.employee_age}</Text>
                     </View>
                 </View>
@@ -98,19 +92,4 @@ export default class HomeScreen extends BaseComponent {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colorConstants.GRAY_LIGHT_COLOR,
-    },
-    viewContainer: {
-        flex: 1
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: 'black',
-    },
-});
 

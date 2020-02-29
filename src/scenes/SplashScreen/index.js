@@ -4,6 +4,8 @@ import { Actions } from 'react-native-router-flux';
 import Constants from '../../config/Constants'
 import { TBC_COLOR } from '../../config/colorConstant';
 var colorConstant = require('../../config/colorConstant')
+import splashStyle from './splashStyle'
+var splashConstant = require('./splashConstants');
 
 export default class splashscreen extends Component {
 
@@ -15,8 +17,8 @@ export default class splashscreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: colorConstant.WHITE_COLOR, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 32, fontWeight: 'bold', color: colorConstant.TBC_COLOR }}>{'Splash Screen'}</Text>
+      <View style={splashStyle.container}>
+        <Text style={splashStyle.containerText}>{splashConstant.SPLASH_SCREEN}</Text>
       </View>
     );
   }

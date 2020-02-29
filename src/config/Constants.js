@@ -29,7 +29,7 @@ export default {
   SPLASH_SCREEN_LOGO: require('../public/images/og_logo.webp'),
   EYE_ICON: require('../public/images/eye_icon.webp'),
 
-  LABEL_USERNAME:'UserName',
+  LABEL_USERNAME:'Username',
   TEXT_INPUT_USERNAME:'loginInputName',
   ERROR_TEXT_INPUT_USERNAME:'Please enter your username/email',
   LABEL_PASSWORD:'Password',
