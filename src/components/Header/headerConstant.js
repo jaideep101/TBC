@@ -17,6 +17,8 @@
 
 // export const CLEAR_RECENT_TEXT = "CLEAR ALL";
 // export const CANCEL_TEXT = "Cancel";
+ export const LEFT_ARROW = require('../../public/images/backArrow.png');
+
 
 
 

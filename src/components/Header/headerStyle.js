@@ -17,6 +17,10 @@ const header = {
     fontSize: 18,
     marginLeft: 20
   },
+  leftImageView:{
+    marginLeft: 20
+
+  }
 };
 
 export default header;

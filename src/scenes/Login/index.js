@@ -23,7 +23,7 @@ import Realm from 'realm';
 import { TBC_COLOR } from '../../config/colorConstant';
 import TouchID from 'react-native-touch-id';
 import ConfirmGoogleCaptcha from 'react-native-google-recaptcha-v2';
-import loginStyle from './loginStyle'
+import loginStyle from './LoginStyle'
 var colorConstant = require('../../config/colorConstant')
 let realm;
 const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';

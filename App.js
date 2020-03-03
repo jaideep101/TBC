@@ -1,17 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
 import { Router, Scene, ActionConst } from 'react-native-router-flux';
-import splashscreen from './src/scenes/SplashScreen';
+import splashscreen from './src/scenes/Splash';
 
 import {
   GoogleAnalyticsTracker,
   GoogleAnalyticsSettings,
 } from 'react-native-google-analytics-bridge';
-import LoginScreen from './src/scenes/LoginScreen';
+import LoginScreen from './src/scenes/Login';
 import Realm from 'realm';
-import HomeScreen from './src/scenes/HomeScreen';
-import MyProfileScreen from './src/scenes/MyProfileScreen';
-import MoreScreen from './src/scenes/MoreScreen';
+import HomeScreen from './src/scenes/Home';
+import MyProfileScreen from './src/scenes/MyProfile';
+import MoreScreen from './src/scenes/More';
 import FBaseWrite from './src/scenes/FirebaseRW/FBaseWrite';
 import FBaseReadItems from './src/scenes/FirebaseRW/FBaseReadItems';
 import TabIcon from './src/components/TabIcon';

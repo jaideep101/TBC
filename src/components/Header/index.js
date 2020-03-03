@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import headerStyle from './headerStyle';
 import { Text } from 'native-base';
-import {fetchJsonGET} from '../../services/FetchData'
+import { fetchJsonGET } from '../../services/FetchData'
+import { Actions } from 'react-native-router-flux';
 var headerConstants = require('./headerConstant')
 var constants = require('../../config/Constants')
 var colorConstants = require('../../config/colorConstant');
@@ -20,7 +21,7 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         }
 
 
@@ -28,7 +29,7 @@ export default class Header extends Component {
     componentDidMount() {
     }
 
-    async fetchData(){
+    async fetchData() {
         let responseData = await fetchJsonGET(constants.API_URL);
         console.log("############### responseData")
     }
@@ -36,19 +37,42 @@ export default class Header extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{ backgroundColor: 'white' }}>
-                    {this.renderBrowseHeader()}
+            <SafeAreaView style={{
+                backgroundColor: colorConstants.TBC_COLOR
+            }}>
+
+                {this.renderBrowseHeader()}
+
             </SafeAreaView>
         );
     }
 
     renderBrowseHeader() {
+        let isleftArrowDisplay = this.props.isleftArrowDisplay === undefined ? true : this.props.isleftArrowDisplay
         return (
             <View style={headerStyle.viewContainer}>
+                {this.renderLeftView(isleftArrowDisplay)}
                 <Text style={headerStyle.headerText}>{this.props.title}</Text>
             </View>
         );
     }
+
+    renderLeftView(flag) {
+        if (flag) {
+            return (<TouchableOpacity testID="browseHeader_button_leftArrow" accessibilityLabel="browseHeader_button_leftArrow" accessible={false} onPress={() => {
+                Actions.pop();
+            }}>
+                <View testID="browseHeader_imageView_leftArrow" accessibilityLabel="browseHeader_imageView_leftArrow" style={headerStyle.leftImageView}>
+                    <Image testID="browseHeader_image_leftArrow" accessibilityLabel="browseHeader_image_leftArrow" source={headerConstants.LEFT_ARROW} style={{ marging: 15, height: 20, width: 15, tintColor: 'white' }}>
+                    </Image>
+                </View>
+            </TouchableOpacity>)
+        } else {
+            return <View></View>
+        }
+
+    }
+
     // renderCartLayout(flag) {
     //     if (!flag) {
     //         let cartItemCount = parseInt(this.props.cartItemCount);
