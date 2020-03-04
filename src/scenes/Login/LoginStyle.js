@@ -29,7 +29,7 @@ export default (styles = StyleSheet.create({
     marginTop: 15,
   },
   inputWrapper: {
-    width: DEVICE_WIDTH - 40,
+    width: DEVICE_WIDTH - 20,
   },
   inlineImg: {
     position: 'absolute',
@@ -48,6 +48,7 @@ export default (styles = StyleSheet.create({
     width: 25,
     height: 25,
     tintColor: 'rgba(0,0,0,0.2)',
+    marginTop:-25
   },
   button: {
     alignItems: 'center',
@@ -93,7 +94,7 @@ export default (styles = StyleSheet.create({
     alignItems: 'center'
   },
   validFormSubView:{
-    paddingLeft: 20, paddingRight: 20
+    paddingLeft: 15, paddingRight: 15
   },
   validFormSecondFieldView:{
     marginTop: 15

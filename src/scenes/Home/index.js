@@ -25,6 +25,7 @@ export default class HomeScreen extends BaseComponent {
 
     async fetchData() {
         let responseData = await fetchJsonGET(constants.API_URL);
+        console.log("fetchdata :" + JSON.stringify(responseData));
         if (this.isValidString(responseData)) {
             if (responseData.status === "success") {
                 if (this.isValidArray(responseData.data)) {

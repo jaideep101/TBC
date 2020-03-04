@@ -23,7 +23,8 @@ import Realm from 'realm';
 import { TBC_COLOR } from '../../config/colorConstant';
 import TouchID from 'react-native-touch-id';
 import ConfirmGoogleCaptcha from 'react-native-google-recaptcha-v2';
-import loginStyle from './LoginStyle'
+import loginStyle from './LoginStyle';
+var commonConstants = require('../../config/Constants');
 var colorConstant = require('../../config/colorConstant')
 let realm;
 const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';
@@ -180,9 +181,9 @@ export default class LoginView extends Component {
           <View style={loginStyle.validFormSubView}>
             <TextInputMaterial
               blurText={this.state.username}
-              refsValue={Constants.TEXT_INPUT_USERNAME}
-              ref={Constants.TEXT_INPUT_USERNAME}
-              label={Constants.LABEL_USERNAME}
+              refsValue={commonConstants.TEXT_INPUT_USERNAME}
+              ref={commonConstants.TEXT_INPUT_USERNAME}
+              label={commonConstants.LABEL_USERNAME}
               maxLength={100}
               autoCapitalize={'none'}
               onChangeText={username => this.setState({ username })}
@@ -190,11 +191,11 @@ export default class LoginView extends Component {
               autoCorrect={false}
               isLoginScreen={false}
               style={loginStyle.input}
-              placeholderTextColor={Constants.PLACEHOLDER_TEXT_COLOR}
-              underlineColorAndroid={Constants.UNDERLINE_COLOR_ANDROID}
+              placeholderTextColor={colorConstant.PLACEHOLDER_TEXT_COLOR}
+              underlineColorAndroid={commonConstants.UNDERLINE_COLOR_ANDROID}
               value={this.state.username}
               textInputName={this.state.username}
-              errorText={Constants.ERROR_TEXT_INPUT_USERNAME}
+              errorText={commonConstants.ERROR_TEXT_INPUT_USERNAME}
               underlineHeight={2}
               keyboardType="email-address"
               onSubmitEditing={event => {
@@ -205,12 +206,12 @@ export default class LoginView extends Component {
               <TextInputMaterial
                 secureTextEntry={this.state.showPass}
                 blurText={this.state.password}
-                refsValue={Constants.TEXT_INPUT_PASSWORD}
+                refsValue={commonConstants.TEXT_INPUT_PASSWORD}
                 showIcon={false}
                 value={this.state.password}
                 textInputName={this.state.password}
-                ref={Constants.TEXT_INPUT_PASSWORD}
-                label={Constants.LABEL_PASSWORD}
+                ref={commonConstants.TEXT_INPUT_PASSWORD}
+                label={commonConstants.LABEL_PASSWORD}
                 maxLength={50}
                 underlineHeight={2}
                 isLoginScreen={false}
@@ -220,9 +221,9 @@ export default class LoginView extends Component {
                 returnKeyType={'done'}
                 autoCorrect={false}
                 style={loginStyle.input}
-                placeholderTextColor={Constants.PLACEHOLDER_TEXT_COLOR}
-                underlineColorAndroid={Constants.UNDERLINE_COLOR_ANDROID}
-                errorText={Constants.ERROR_TEXT_INPUT_PASSWORD}
+                placeholderTextColor={colorConstant.PLACEHOLDER_TEXT_COLOR}
+                underlineColorAndroid={colorConstant.UNDERLINE_COLOR_ANDROID}
+                errorText={commonConstants.ERROR_TEXT_INPUT_PASSWORD}
                 onFocus={() => this.inputFocused.bind(this)}
               />
             </View>
@@ -230,7 +231,7 @@ export default class LoginView extends Component {
                         activeOpacity={0.7}
                         style={loginStyle.btnEye}
                         onPress={this.showPass}>
-                        <Image source={Constants.EYE_ICON} style={loginStyle.iconEye} />
+                        <Image source={commonConstants.EYE_ICON} style={loginStyle.iconEye} />
                     </TouchableOpacity>  */}
           </View>
         </View>
@@ -247,7 +248,7 @@ export default class LoginView extends Component {
           {}
           <Text
             style={loginStyle.loginSubmitButtonText}>
-            {Constants.LOGIN_BUTTON_TEXT}
+            {commonConstants.LOGIN_BUTTON_TEXT}
           </Text>
         </TouchableOpacity>
       </View>
