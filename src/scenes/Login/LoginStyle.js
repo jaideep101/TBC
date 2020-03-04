@@ -85,7 +85,7 @@ export default (styles = StyleSheet.create({
     fontSize: 32, color: colorConstant.TBC_COLOR 
   },
   loginSumbitButtonView:{
-    paddingLeft: 40, paddingRight: 40, marginTop: 60 
+    paddingLeft: 30, paddingRight: 30, marginTop: 60 
   },
   loginSubmitButtonText:{
     color: colorConstant.WHITE_COLOR, fontSize: 20, fontWeight: 'bold'
