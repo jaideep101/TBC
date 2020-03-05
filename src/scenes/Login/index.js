@@ -27,8 +27,8 @@ import loginStyle from './LoginStyle';
 var commonConstants = require('../../config/Constants');
 var colorConstant = require('../../config/colorConstant')
 let realm;
-const siteKey = '6Lf41K0UAAAAAHd3FeZbJsMbL00-Beqyk33NHqtp';
-const baseUrl = 'https://google.com';
+const siteKey = '6Le2394UAAAAAHlpjMsukQVuXNAMFLClkynBAQTh';
+const baseUrl = 'https://lami.net.in';
 const MARGIN = 40;
 const DEVICE_WIDTH = Dimensions.get('window').width;
 var isCaptchaDisplay = false;
@@ -47,8 +47,7 @@ export default class LoginView extends Component {
     this.showPass = this.showPass.bind(this);
     this.buttonAnimated = new Animated.Value(0);
     this.growAnimated = new Animated.Value(0);
-    // this._onPress = this._onPress.bind(this);
-
+     this.onMessage = this.onMessage.bind(this);
     realm = new Realm({ path: 'UserDatabase.realm' });
     //creating temporary user logins
     realm.write(() => {
@@ -93,9 +92,11 @@ export default class LoginView extends Component {
       : this.setState({ showPass: true, press: false });
   }
 
-  onMessage = event => {
+  onMessage = event =>{
+    console.log('########## onMeassage: '+event);
     if (event && event.nativeEvent.data) {
       if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
+        console.log('error', event.nativeEvent.data);
         this.captchaForm.hide();
         return;
       } else {
@@ -120,7 +121,7 @@ export default class LoginView extends Component {
           siteKey={siteKey}
           baseUrl={baseUrl}
           languageCode='en'
-          onMessage={this.onMessage}
+          onMessage={()=>this.onMessage()}
         />
       </View>
     );
